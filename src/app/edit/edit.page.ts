@@ -13,6 +13,7 @@ import { IArco } from '../share/interfaces';
 export class EditPage implements OnInit {
 
   public arco:IArco;
+  public arc : IArco;
   arcoForm: FormGroup;
   id: any;
   
@@ -71,10 +72,10 @@ export class EditPage implements OnInit {
   }
 
   saveArco() {
-    this.arco = this.arcoForm.value;
+    this.arc = this.arcoForm.value;
     let nextKey = this.arco.name.trim();
-    this.arco.id = nextKey;
-    this.arcodbService.setItem(nextKey, this.arco );
+    this.arc.id = nextKey;
+    this.arcodbService.setItem(nextKey, this.arc );
     console.warn(this.arcoForm.value);
   }
 
