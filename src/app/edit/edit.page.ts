@@ -75,7 +75,7 @@ export class EditPage implements OnInit {
     this.arc = this.arcoForm.value;
     let nextKey = this.arco.name.trim();
     this.arc.id = nextKey;
-    this.arcodbService.setItem(nextKey, this.arc );
+    this.arcodbService.setItem(nextKey, this.arc);
     console.warn(this.arcoForm.value);
   }
 
