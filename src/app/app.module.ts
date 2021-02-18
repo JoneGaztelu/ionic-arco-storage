@@ -12,10 +12,26 @@ import { CreatePageModule } from './create/create.module';
 import { DetailsPageModule } from './details/details.module';
 import { EditPageModule } from './edit/edit.module';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, FormsModule, ReactiveFormsModule, IonicStorageModule.forRoot(), IonicModule.forRoot(), AppRoutingModule, CreatePageModule, DetailsPageModule, EditPageModule],
+  imports: [BrowserModule, 
+    FormsModule, 
+    ReactiveFormsModule, 
+    IonicStorageModule.forRoot(), 
+    IonicModule.forRoot(), 
+    AppRoutingModule, 
+    CreatePageModule, 
+    DetailsPageModule, 
+    EditPageModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireDatabaseModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
