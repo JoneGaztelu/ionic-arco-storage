@@ -4,6 +4,7 @@ import { ArcodbserviceService } from '../core/arcodbservice.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { IArco } from '../share/interfaces';
+import { ArcocrudService } from '../core/arcocrud.service';
 
 @Component({
   selector: 'app-create',
@@ -16,7 +17,7 @@ export class CreatePage implements OnInit {
 
   constructor(
     private router: Router,
-    private ArcodbService: ArcodbserviceService,
+    private arcocrudService: ArcocrudService,
     public toastController: ToastController
   ) { }
 
@@ -59,7 +60,7 @@ export class CreatePage implements OnInit {
     this.arco = this.arcoForm.value;
     let nextKey = this.arco.name.trim();
     this.arco.id = nextKey;
-    this.ArcodbService.setItem(nextKey, this.arco );
+    this.arcocrudService.create_Arco(this.arco );
     console.warn(this.arcoForm.value);
   }
 

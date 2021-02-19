@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ArcodbserviceService } from '../core/arcodbservice.service';
 import { IArco } from '../share/interfaces';
 import { ToastController } from '@ionic/angular';
+import { ArcocrudService } from './../core/arcocrud.service';
 
 @Component({
   selector: 'app-details',
@@ -17,43 +18,41 @@ export class DetailsPage implements OnInit {
   constructor(
     private activatedrouter: ActivatedRoute,
     private router: Router,
-    private arcodbService: ArcodbserviceService,
+    private arcocrudService: ArcocrudService,
     public toastController: ToastController
   ) { }
 
   ngOnInit() {
     this.id = this.activatedrouter.snapshot.params.id;
-    this.arcodbService.getItem(this.id).then(
-      (data:IArco)=> this.arco = data
-    );
-  }
+    this.arcocrudService.read_Arcos().subscribe(data => {
+      let arcos = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          isEdit: false,
+          name: e.payload.doc.data()['name'],
+          place: e.payload.doc.data()['place'],
+          date: e.payload.doc.data()['date'],
+          image: e.payload.doc.data()['image'],
+          description: e.payload.doc.data()['description'],
 
-  editRecord(arco){
-    this.router.navigate(['edit',arco.id])
-  }
+        };
+      })
+      console.log(arcos);
 
-  async removeRecord(id) {
-    const toast = await this.toastController.create({
-      header: 'Elimiar competicion',
-      position: 'top',
-      buttons: [
-        {
-          side: 'start',
-          icon: 'delete',
-          text: 'ACEPTAR',
-          handler: () => {
-            this.arcodbService.remove(id);
-            this.router.navigate(['home']);
-          }
-        }, {
-          text: 'CANCELAR',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
+      arcos.forEach(element =>{
+        if (element.id == this.id){
+          this.arco = element;
         }
-      ]
+      });
     });
-    toast.present();
   }
+
+  EditRecord(arco){
+    this.router.navigate(['edit', arco.id]);
+  }
+
+  RemoveRecord(rowID) {
+    this.arcocrudService.delete_Arco(rowID);
+  }
+
 }
