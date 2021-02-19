@@ -47,10 +47,10 @@ export class EditPage implements OnInit {
         if (element.id == this.id){
           this.arco = element;
           this.arcoForm.get('name').setValue(this.arco.name);
-        this.arcoForm.get('place').setValue(this.arco.place);
-        this.arcoForm.get('date').setValue(this.arco.date);
-        this.arcoForm.get('image').setValue(this.arco.image);
-        this.arcoForm.get('description').setValue(this.arco.description);
+          this.arcoForm.get('place').setValue(this.arco.place);
+          this.arcoForm.get('date').setValue(this.arco.date);
+          this.arcoForm.get('image').setValue(this.arco.image);
+          this.arcoForm.get('description').setValue(this.arco.description);
         }
       });
     });
