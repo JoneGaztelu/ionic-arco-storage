@@ -39,15 +39,15 @@ export class DetailsPage implements OnInit {
       })
       console.log(arcos);
 
-      arcos.forEach(element =>{
-        if (element.id == this.id){
+      arcos.forEach(element => {
+        if (element.id == this.id) {
           this.arco = element;
         }
       });
     });
   }
 
-  EditRecord(arco){
+  EditRecord(arco) {
     this.router.navigate(['edit', arco.id]);
   }
 

@@ -13,11 +13,11 @@ import { IArco } from '../share/interfaces';
 })
 export class EditPage implements OnInit {
 
-  public arco:IArco;
-  public arc : IArco;
+  public arco: IArco;
+  public arc: IArco;
   arcoForm: FormGroup;
   id: any;
-  
+
 
   constructor(
     private activatedrouter: ActivatedRoute,
@@ -28,7 +28,7 @@ export class EditPage implements OnInit {
 
   ngOnInit() {
     this.id = this.activatedrouter.snapshot.params.id;
-    this.arcocrudService.read_Arcos().subscribe(data=>{
+    this.arcocrudService.read_Arcos().subscribe(data => {
       let arcos = data.map(e => {
         return {
           id: e.payload.doc.id,
@@ -43,8 +43,8 @@ export class EditPage implements OnInit {
       })
       console.log(arcos);
 
-      arcos.forEach(element =>{
-        if (element.id == this.id){
+      arcos.forEach(element => {
+        if (element.id == this.id) {
           this.arco = element;
           this.arcoForm.get('name').setValue(this.arco.name);
           this.arcoForm.get('place').setValue(this.arco.place);
@@ -62,6 +62,7 @@ export class EditPage implements OnInit {
       description: new FormControl(''),
     });
   }
+
   async onSubmit() {
     const toast = await this.toastController.create({
       header: 'Guardar competicion',
